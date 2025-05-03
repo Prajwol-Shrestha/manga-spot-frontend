@@ -1,0 +1,9 @@
+echo "\n🚀 Running lint-staged..."
+npx lint-staged
+
+if [ $? -ne 0 ]; then
+    echo "\n🚨 Linting failed! Please fix the errors above."
+    exit 1
+else 
+    echo "\n✅ Linting passed!"
+fi

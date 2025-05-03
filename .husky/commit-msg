@@ -1,0 +1,12 @@
+
+echo "\n🚀 Running commit message validation..."
+
+npx --no -- commitlint --edit $1
+
+if [ $? -ne 0 ]; then
+    echo -e "\n🚨 ❌ Commit message validation failed!"
+    echo -e "\n👀 Please ensure your commit message follows the defined conventions."
+    exit 1
+else 
+    echo -e "\n✅ Commit message validation passed! Committing..."
+fi

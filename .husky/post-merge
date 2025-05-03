@@ -1,0 +1,9 @@
+echo -e "\n 📦 Running Post-Merge Hook. Installing dependencies..."
+
+pnpm install
+
+if [ $? -eq 0 ]; then
+  echo -e "\n🎉 ✅ Installation complete! Dependencies are up to date. All set! 🚀"
+else
+  echo -e "\n🚨 ❌ Installation failed! Please check the errors above and try again."
+fi
