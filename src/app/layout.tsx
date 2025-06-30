@@ -32,7 +32,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col justify-between">
             <Header />
-            <main>{children}</main>
+            <main className='container'>{children}</main>
             <Footer />
           </div>
           <Toaster />
