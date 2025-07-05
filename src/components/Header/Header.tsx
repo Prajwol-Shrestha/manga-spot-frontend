@@ -34,7 +34,7 @@ export default function Navbar() {
 
   return (
     <nav ref={navbarRef} className="text-foreground container h-[70px] bg-transparent transition-all">
-      <div className="container flex items-center justify-between px-2 py-4">
+      <div className="flex items-center justify-between px-2 py-4">
         <Link href={'/'}>
           <Typography variant={'h6'} className="text-primary">
             {' '}

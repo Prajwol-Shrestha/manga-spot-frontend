@@ -45,7 +45,7 @@
 }
 
 .dark {
-  --background: #242428;
+  --background: #1a1a1c;
   --foreground: #fdfefe;
 
   --primary: #53FF86;
@@ -57,7 +57,7 @@
   --secondary-200: #808080;
   --secondary-300: #828689;
   --secondary-400: #4b4f53;
-  --secondary-600: #1a1a1c;
+  --secondary-600: #242428;
   --secondary-foreground: #fdfefe;
 
   --accent: #8b5cf6;

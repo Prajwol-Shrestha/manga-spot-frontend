@@ -6,13 +6,12 @@ const defaultConfig: RequestInit = {
   cache: 'force-cache',
 };
 
+// @eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function fetcher(url: string, queryParams: Record<string, any> = {}, config: RequestInit = {}) {
   try {
     const params = buildQueryParams(queryParams);
     const endpoint = new URL(`${baseURL}${url}`);
     endpoint.search = params.toString();
-
-    console.log(endpoint, 'endpint')
 
     const response = await fetch(endpoint.toString(), {
       ...defaultConfig,
