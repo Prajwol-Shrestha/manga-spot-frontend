@@ -5,10 +5,15 @@ import { IMangaWithVolume } from '@/types/manga';
 export async function getRandomManga(): Promise<IMangaWithVolume> {
   const result = await fetcher(
     END_POINTS.manga.getRandomManga,
-    {includes: ['cover_art']},
+    { includes: ['cover_art'] },
     {
       cache: 'no-cache',
     }
   );
+  return result;
+}
+
+export async function getMangas(params?: any): Promise<IMangaWithVolume[]> {
+  const result = await fetcher(END_POINTS.manga.getMangas, { ...params });
   return result;
 }

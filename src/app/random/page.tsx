@@ -11,7 +11,6 @@ export default async function page() {
   const data = await getRandomManga();
   const { id, title, description, tags, coverArt } = data ?? {};
 
-  console.log(coverArt, 'coverArt');
 
   return (
     <section className="hero relative !bg-cover !bg-center">

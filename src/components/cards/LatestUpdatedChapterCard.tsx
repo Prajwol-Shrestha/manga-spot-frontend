@@ -29,7 +29,7 @@ export default function LatestUpdatedChaperCard({ chapter }: { chapter: ChapterD
         <img src={coverArt} alt={mangaTitle} className="h-full w-full rounded-md object-cover" />
       </div>
       <div className="flex-1 py-3">
-        <Typography variant={'body2'} className="font-semibold">
+        <Typography variant={'body2'} className="font-semibold line-clamp-2">
           {mangaTitle}
         </Typography>
         <div className="flex items-center justify-between gap-2 ">

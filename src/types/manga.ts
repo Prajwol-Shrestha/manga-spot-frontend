@@ -52,5 +52,5 @@ export interface IVolumeInfo {
 }
 
 export interface IMangaWithVolume extends IManga {
-  volumes: Record<string, VolumeInfo>;
+  volumes: Record<string, IVolumeInfo>;
 }

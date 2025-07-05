@@ -33,7 +33,7 @@ export default function Navbar() {
   function handleLogout() {}
 
   return (
-    <nav ref={navbarRef} className="text-foreground container h-[70px] bg-transparent transition-all">
+    <nav ref={navbarRef} className="text-foreground container h-[70px] bg-transparent transition-all z-50">
       <div className="flex items-center justify-between px-2 py-4">
         <Link href={'/'}>
           <Typography variant={'h6'} className="text-primary">
