@@ -184,7 +184,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
           className
         )}
         disabled={!canScrollPrev}
-        onClick={() => console.log('fick')}
+        onClick={scrollPrev}
         {...props}
       >
         <ChevronLeft className="h-4 w-4" />

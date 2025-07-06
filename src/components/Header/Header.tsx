@@ -5,10 +5,16 @@ import { ThemeToggler } from './ThemeToggler';
 import { navItems } from '@/constants/nav-items';
 import Typography from '../ui/Typography';
 import { Button } from '../ui/Button';
+import useAuthStore, { isLoggedIn } from '@/stores/authStore';
+import { toast } from 'sonner';
 
 export default function Navbar() {
+  const { logout } = useAuthStore();
   const [showNavbar, setShowNavbar] = useState(false);
   const navbarRef = useRef(null);
+
+  const showLogin = !isLoggedIn();
+  const showLogOut = isLoggedIn();
 
   const stickyStyle = ['sticky', 'top-[8px]', 'backdrop-blur-sm', 'shadow-md'];
 
@@ -16,7 +22,6 @@ export default function Navbar() {
     const handleScroll = () => {
       if (navbarRef.current) {
         const navbarEl: HTMLHeadingElement = navbarRef.current;
-        console.log(window.scrollY);
         stickyStyle.map((style) => navbarEl.classList.toggle(style, window.scrollY > 20));
         navbarEl.classList.toggle('rounded-md', window.scrollY > 20);
         navbarEl.classList.toggle('', window.scrollY > 20);
@@ -30,10 +35,13 @@ export default function Navbar() {
     };
   }, []);
 
-  function handleLogout() {}
+  const handleLogout = () => {
+    logout();
+    toast.success('Logged out!');
+  };
 
   return (
-    <nav ref={navbarRef} className="text-foreground container h-[70px] bg-transparent transition-all z-50">
+    <nav ref={navbarRef} className="text-foreground z-50 container h-[70px] bg-transparent transition-all">
       <div className="flex items-center justify-between px-2 py-4">
         <Link href={'/'}>
           <Typography variant={'h6'} className="text-primary">
@@ -68,12 +76,20 @@ export default function Navbar() {
         </ul>
         <div className="hidden lg:flex lg:gap-4">
           <div className="flex items-center gap-2">
+            {showLogin && (
               <Link href={'/login'}>
                 <Button variant={'default'} size={'sm'} className="py-2">
                   {' '}
                   Login{' '}
                 </Button>
               </Link>
+            )}
+            {showLogOut && (
+              <Button onClick={handleLogout} variant={'default'} size={'sm'} className="w-full py-2">
+                {' '}
+                Logout{' '}
+              </Button>
+            )}
           </div>
 
           <ThemeToggler />
@@ -98,12 +114,20 @@ export default function Navbar() {
             ))}
             <div className="flex flex-col gap-2">
               <>
-                <Link href={'/login'}>
-                  <Button variant={'default'} size={'sm'} className="w-full py-2">
+                {showLogin && (
+                  <Link href={'/login'}>
+                    <Button variant={'default'} size={'sm'} className="w-full py-2">
+                      {' '}
+                      Login{' '}
+                    </Button>
+                  </Link>
+                )}
+                {showLogOut && (
+                  <Button onClick={handleLogout} variant={'default'} size={'sm'} className="w-full py-2">
                     {' '}
-                    Login{' '}
+                    Logout{' '}
                   </Button>
-                </Link>
+                )}
               </>
             </div>
           </ul>

@@ -20,7 +20,6 @@ const queryParams = {
 export default async function PopularMangasCarousel() {
   const data = await getMangas(queryParams);
   const popularMangas = data?.data || [];
-  console.log(popularMangas, 'data');
 
   return (
     <div className="container px-6">
