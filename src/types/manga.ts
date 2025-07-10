@@ -34,7 +34,8 @@ export interface IManga {
     tags: IMangaTag[];
     author: string;
     artist: string;
-    coverArt: string;
+  coverArt: string;
+  bookmarkedByMe: boolean;
 }
 
 export interface IChapterInfo {

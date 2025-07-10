@@ -4,6 +4,7 @@ import React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/Carousel';
 import CarouselCard from './CarouselCard';
 import Autoplay from 'embla-carousel-autoplay';
+import { cookies } from 'next/headers';
 
 // popular titles
 // https://api.mangadex.org/manga?includes[]=cover_art&includes[]=artist&includes[]=author&order[followedCount]=desc&contentRating[]=safe&contentRating[]=suggestive&hasAvailableChapters=true&createdAtSince=2025-05-30T18%3A15%3A00
@@ -18,7 +19,18 @@ const queryParams = {
   createdAtSince: dayjs().subtract(4, 'month').format('YYYY-MM-DDTHH:mm:ss'),
 };
 export default async function PopularMangasCarousel() {
-  const data = await getMangas(queryParams);
+  const cookieStore =await cookies()
+  const cookieHeader = cookieStore.toString()
+
+  const config: RequestInit = {
+    ...(cookieHeader && {
+      headers: {
+        Cookie: cookieHeader,
+      },
+    }),
+  };
+
+  const data = await getMangas(queryParams, config);
   const popularMangas = data?.data || [];
 
   return (

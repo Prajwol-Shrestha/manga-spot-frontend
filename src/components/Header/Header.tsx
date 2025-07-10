@@ -7,6 +7,8 @@ import Typography from '../ui/Typography';
 import { Button } from '../ui/Button';
 import useAuthStore, { isLoggedIn } from '@/stores/authStore';
 import { toast } from 'sonner';
+import fetcher from '@/lib/fetcher';
+import { END_POINTS } from '@/constants/endpoints';
 
 export default function Navbar() {
   const { logout } = useAuthStore();
@@ -35,9 +37,15 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    toast.success('Logged out!');
+  const handleLogout = async () => {
+    try {
+      await fetcher(END_POINTS.auth.logout)
+      logout();
+      toast.success('Logged out!');
+    } catch (err) {
+      console.log(err);
+    }
+
   };
 
   return (

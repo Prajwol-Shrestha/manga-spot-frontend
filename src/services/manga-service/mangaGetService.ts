@@ -13,7 +13,7 @@ export async function getRandomManga(): Promise<IMangaWithVolume> {
   return result;
 }
 
-export async function getMangas(params?: any): Promise<IMangaWithVolume[]> {
-  const result = await fetcher(END_POINTS.manga.getMangas, { ...params });
+export async function getMangas(params?: any, config?: RequestInit): Promise<IMangaWithVolume[]> {
+  const result = await fetcher(END_POINTS.manga.getMangas, { ...params }, config);
   return result;
 }

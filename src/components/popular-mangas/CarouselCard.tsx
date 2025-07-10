@@ -3,8 +3,8 @@ import React from 'react';
 import Typography from '../ui/Typography';
 import { ContentRatingBadge, StatusBadge } from '../CustomBadges/CustomBadges';
 import { Badge } from '../ui/Badge';
-import { Button } from '../ui/Button';
 import IconButton from '../ui/IconButton';
+import BookmarkButton from '../Buttons/BookmarkButton';
 
 interface IProps {
   manga: IMangaWithVolume;
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export default function CarouselCard({ manga, index }: IProps) {
-  const { title, description, status, contentRating, tags, coverArt, author } = manga;
+  const { id, title, description, status, contentRating, tags, coverArt, author } = manga;
   const rank = index + 1;
 
   return (
@@ -44,7 +44,7 @@ export default function CarouselCard({ manga, index }: IProps) {
             iconPlacement={'left'}
             additionalClassNames="rounded-xl text-secondary-600"
           />
-          <IconButton variant={'secondary'} text="Bookmark" icon="material-symbols:bookmark" iconPlacement="right" />
+          <BookmarkButton manga={manga} type="button" />
         </div>
         <div className="mt-auto flex items-center justify-between gap-3">
           <Typography variant={'caption'} className="font-semibold">

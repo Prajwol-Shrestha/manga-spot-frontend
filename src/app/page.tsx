@@ -1,5 +1,6 @@
 import LatestUpdated from "@/components/latest-updated/LatestUpdated";
 import PopularMangasCarousel from "@/components/popular-mangas/PopularMangasCarousel";
+import useAuthStore from "@/stores/authStore";
 
 export default function Home() {
   return <div className="my-12 space-y-8">

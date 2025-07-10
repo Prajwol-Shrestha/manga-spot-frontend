@@ -1,10 +1,10 @@
-import { getAccessToken } from '@/stores/authStore';
 import buildQueryParams from './buildQueryParams';
 
-const baseURL = process.env.BASE_URL;
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const defaultConfig: RequestInit = {
   cache: 'force-cache',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
   }
@@ -13,7 +13,6 @@ const defaultConfig: RequestInit = {
 // @eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function fetcher(url: string, queryParams?: Record<string, any>, config: RequestInit = {}) {
   try {
-    const accessToken= getAccessToken()
     const endpoint = new URL(`${baseURL}${url}`);
 
     if (queryParams) {
@@ -27,7 +26,7 @@ export default async function fetcher(url: string, queryParams?: Record<string, 
       headers: {
         ...defaultConfig.headers,
         ...config.headers,
-        Authorization: accessToken ? `Bearer ${accessToken}` : '',
+        // Authorization: accessToken ? `Bearer ${accessToken}` : '',
       },
     });
 

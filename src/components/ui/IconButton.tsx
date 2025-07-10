@@ -29,7 +29,7 @@ export default function IconButton({
     >
       {icon && iconPlacement === 'left' && <Icon icon={icon} fontSize={'2rem'} />}
       {text}
-      {icon && iconPlacement === 'right' && <Icon icon={icon} fontSize={'1.35rem'} />}
+      {icon && iconPlacement === 'right' && <Icon icon={icon} fontSize={'2rem'} />}
     </Button>
   );
 }

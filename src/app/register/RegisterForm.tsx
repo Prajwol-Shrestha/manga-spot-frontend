@@ -1,99 +1,104 @@
 'use client';
 
-import { signup } from '@/actions/signup';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import Typography from '@/components/ui/Typography';
 import useAuthStore from '@/stores/authStore';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import React, { useActionState, useEffect, useState } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import { toast } from 'sonner';
+import fetcher from '@/lib/fetcher';
+import { END_POINTS } from '@/constants/endpoints';
 
-// TODO: password validation
 export default function RegisterForm() {
-  const [state, formAction] = useActionState(signup, { error: '', success: undefined, data: undefined });
-  const { pending } = useFormStatus();
+  const { setUser } = useAuthStore();
+  const router = useRouter();
 
-  const { setUser, setAccessToken } = useAuthStore();
-
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (state.error) {
-      toast.error(state.error);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords don't match");
+      return;
     }
-  }, [state]);
 
-  if (state.success) {
-    const {accessToken, ...rest} = state.data
-    setUser(rest);
-    setAccessToken(accessToken);
-    redirect('/');
-  }
+    try {
+      setLoading(true);
+      const data = await fetcher(END_POINTS.auth.signup, undefined, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, email, name }),
+      });
+
+      const { accessToken, ...user } = data;
+      setUser(user);
+
+      toast.success('Registration successful!');
+      router.push('/');
+    } catch (err: any) {
+      toast.error(err?.message || 'Something went wrong.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <form
-      action={formAction}
+      onSubmit={handleSubmit}
       className="bg-secondary mt-6 w-full max-w-[600px] min-w-[320px] space-y-4 rounded-md px-8 py-12"
     >
       <Typography variant={'h6'} className="text-center">
-        {' '}
-        Register{' '}
+        Register
       </Typography>
 
       <div>
         <Label htmlFor="name">Full Name</Label>
-        <Input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+        <Input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
       </div>
+
       <div>
         <Label htmlFor="username">Username</Label>
-        <Input
-          type="text"
-          name="username"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <Input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
       </div>
+
       <div>
         <Label htmlFor="email">Email</Label>
-        <Input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </div>
+
       <div>
         <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <Input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
 
       <div>
         <Label htmlFor="confirm-password">Confirm Password</Label>
         <Input
           type="password"
-          name="confirm-password"
           id="confirm-password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          required
         />
       </div>
 
       <div className="flex">
-        <Button type="submit" disabled={pending} className="mx-auto min-w-28">
-          {pending ? 'Registering...' : 'Register'}
+        <Button type="submit" disabled={loading} className="mx-auto min-w-28">
+          {loading ? 'Registering...' : 'Register'}
         </Button>
       </div>
+
       <Typography variant={'caption'} className="mt-4 text-center">
         Already have an account?{' '}
         <Link href="/login" className="underline">
