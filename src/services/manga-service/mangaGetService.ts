@@ -18,3 +18,8 @@ export async function getMangas(params?: any, config?: RequestInit): Promise<IMa
   const result = await fetcher(END_POINTS.manga.getMangas, { ...params }, config);
   return result;
 }
+
+export async function getMangaById(id: string, params?: any, config?: RequestInit): Promise<IMangaWithVolume> {
+  const result = await fetcher(END_POINTS.manga.getMangaById.replace(':id', id), { ...params }, config);
+  return result;
+}

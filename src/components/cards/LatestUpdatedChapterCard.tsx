@@ -7,6 +7,7 @@ import { ContentRatingBadge, StatusBadge } from '../CustomBadges/CustomBadges';
 
 export default function LatestUpdatedChaperCard({ chapter }: { chapter: ChapterData }) {
   const {
+    id: chapterId,
     chapter: chapterNumber,
     title,
     createdAt,
@@ -19,7 +20,7 @@ export default function LatestUpdatedChaperCard({ chapter }: { chapter: ChapterD
     title: mangaTitle,
     status,
     contentRating,
-    // id: mangaId,
+    id: mangaId,
     coverArt,
   } = manga ?? {};
 
@@ -33,7 +34,7 @@ export default function LatestUpdatedChaperCard({ chapter }: { chapter: ChapterD
           {mangaTitle}
         </Typography>
         <div className="flex items-center justify-between gap-2 ">
-          <Link href={'/'} className="mt-3 hover:underline">
+          <Link href={`/manga/${mangaId}/chapter/${chapterId}`} className="mt-3 hover:underline">
             Chapter {chapterNumber} {title && `- ${title}`}{' '}
           </Link>
           <Typography variant={'caption'}> {getAgo(updatedAt ?? createdAt)}</Typography>

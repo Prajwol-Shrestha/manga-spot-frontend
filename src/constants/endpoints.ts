@@ -10,6 +10,7 @@ export const END_POINTS = {
   manga: {
     getMangas: '/manga',
     getRandomManga: '/manga/random',
+    getMangaById: '/manga/:id',
     getLatestUpdatedChapters: '/manga/latest-updated-chapters',
   },
   bookmarks: {
@@ -17,4 +18,7 @@ export const END_POINTS = {
     addBookmark: '/bookmarks',
     removeBookmark: '/bookmarks/:id',
   },
+  "chapter-pages": {
+    getChapterPages: '/chapter-pages/:chapterId' 
+  }
 };
