@@ -6,18 +6,30 @@ import { getRandomManga } from '@/services/manga-service/mangaGetService';
 import Link from 'next/link';
 import Description from './Description';
 import Tag from '@/components/Tag/Tag';
+import BookmarkButton from '@/components/Buttons/BookmarkButton';
+import { cookies } from 'next/headers';
 
 export default async function page() {
-  const data = await getRandomManga();
+    const cookieStore =await cookies()
+    const cookieHeader = cookieStore.toString()
+  
+    const config: RequestInit = {
+      ...(cookieHeader && {
+        headers: {
+          Cookie: cookieHeader,
+        },
+      }),
+    };
+  
+  const data = await getRandomManga(config);
   const { id, title, description, tags, coverArt } = data ?? {};
-
 
   return (
     <section className="hero relative !bg-cover !bg-center">
       <div className="rounded-lg bg-gray-600 py-12 backdrop-blur-xl">
         <div className="container flex flex-col gap-4 sm:flex-row">
           <div className="h-[20vh] sm:h-[40vh] sm:basis-1/3">
-            <img src={coverArt} loading="lazy" alt={title} className="h-full object-contain rounded-md" />
+            <img src={coverArt} loading="lazy" alt={title} className="h-full object-cover rounded-md" />
           </div>
           <div className="flex flex-1 flex-col gap-3">
             <Typography variant={'h6'} className="text-white">
@@ -33,7 +45,7 @@ export default async function page() {
                   additionalClassNames="rounded-xl text-secondary-600"
                 />
               </Link>
-              {/* <BookmarkButton mal_id={mal_id} title={title} image={images.webp.image_url}/> */}
+              <BookmarkButton type='button' manga={data}/>
             </div>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (

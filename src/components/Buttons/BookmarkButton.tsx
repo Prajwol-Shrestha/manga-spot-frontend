@@ -11,9 +11,8 @@ interface IProps {
   className?: string;
   type: 'icon' | 'button';
   manga: Pick<IMangaWithVolume, 'id' | 'title' | 'coverArt' | 'bookmarkedByMe'>;
-  bookmarkId?: string;
 }
-export default function BookmarkButton({ className, type = 'button', manga, bookmarkId }: IProps) {
+export default function BookmarkButton({ className, type = 'button', manga }: IProps) {
   const { id: mangaId, title, coverArt, bookmarkedByMe } = manga ?? {};
   const [isBookmarked, setIsBookmarked] = useState(bookmarkedByMe);
 
@@ -21,7 +20,7 @@ export default function BookmarkButton({ className, type = 'button', manga, book
     setIsBookmarked((prev) => !prev);
     try {
       if (isBookmarked) {
-        return await removeBookmark(bookmarkId ?? '');
+        return await removeBookmark(mangaId);
       }
       await addBookmark({ mangaId, coverArt: coverArt, title: title });
     } catch (err) {

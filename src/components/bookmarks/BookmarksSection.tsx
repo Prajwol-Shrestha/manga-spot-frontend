@@ -35,7 +35,7 @@ export default async function BookmarksSection({className}: IProps) {
       <div className="mt-3 space-y-2">
         {isEmpty && <Typography variant={'body2'}>You have no bookmarks yet.</Typography>}
         {fiveBookmarks.map((bookmark) => (
-          <BookmarkCard key={bookmark.id} bookmark={bookmark} />
+          <BookmarkCard key={bookmark.mangaId} bookmark={bookmark} />
         ))}
       </div>
     </section>
