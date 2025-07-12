@@ -4,6 +4,7 @@ import { ChapterData } from '@/types/chapters';
 import Link from 'next/link';
 import { getAgo } from '@/lib/date-helper';
 import { ContentRatingBadge, StatusBadge } from '../CustomBadges/CustomBadges';
+import NoCoverImage from '../NoData/NoCoverImage';
 
 export default function LatestUpdatedChaperCard({ chapter }: { chapter: ChapterData }) {
   const {
@@ -27,7 +28,10 @@ export default function LatestUpdatedChaperCard({ chapter }: { chapter: ChapterD
   return (
     <div className="flex gap-4">
       <div className="h-40 w-36 rounded-md">
-        <img src={coverArt} alt={mangaTitle} className="h-full w-full rounded-md object-cover" />
+        {coverArt ? (
+          <img src={coverArt} alt={mangaTitle} className="h-full w-full rounded-md object-cover" />
+        ): (
+          <NoCoverImage />)}
       </div>
       <div className="flex-1 py-3">
         <Link href={`/manga/${mangaId}`}>

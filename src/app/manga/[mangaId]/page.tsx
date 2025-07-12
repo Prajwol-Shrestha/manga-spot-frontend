@@ -5,6 +5,7 @@ import { getMangaById } from '@/services/manga-service/mangaGetService';
 import { IMangaWithVolume } from '@/types/manga';
 import BookmarkButton from '@/components/Buttons/BookmarkButton';
 import { cookies } from 'next/headers';
+import NoCoverImage from '@/components/NoData/NoCoverImage';
 
 export default async function MangaDetailsPage({ params }: { params: Promise<{ mangaId: string }> }) {
   const cookieStore = await cookies()
@@ -25,7 +26,6 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
 
   const chapters = mangaData.volumes.flatMap((v) => v.chapters);
 
-  console.log(mangaData, 'mangaData.coverArt');
 
   return (
     <section className="container mx-auto max-w-5xl space-y-10 px-4 py-12">
@@ -43,7 +43,7 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
                 decoding="async"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-sm text-gray-400">No Cover</div>
+                <NoCoverImage />
             )}
           </div>
         </div>

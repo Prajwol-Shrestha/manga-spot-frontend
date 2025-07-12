@@ -6,6 +6,7 @@ import { Badge } from '../ui/Badge';
 import IconButton from '../ui/IconButton';
 import BookmarkButton from '../Buttons/BookmarkButton';
 import Link from 'next/link';
+import NoCoverImage from '../NoData/NoCoverImage';
 
 interface IProps {
   manga: IMangaWithVolume;
@@ -19,7 +20,11 @@ export default function CarouselCard({ manga, index }: IProps) {
   return (
     <div className="flex gap-6">
       <div className="h-80 w-80 rounded-md">
-        <img src={coverArt} alt={title} className="h-full w-full rounded-md object-cover" />
+        {coverArt ? (
+          <img src={coverArt} alt={title} className="h-full w-full rounded-md object-cover" />
+        ) : (
+          <NoCoverImage />
+        )}
       </div>
       <div className="h-full flex-1 space-y-3.5 py-4 pr-8">
         <Link href={`/manga/${id}`}>
