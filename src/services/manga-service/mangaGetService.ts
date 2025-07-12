@@ -20,6 +20,10 @@ export async function getMangas(params?: any, config?: RequestInit): Promise<IMa
 }
 
 export async function getMangaById(id: string, params?: any, config?: RequestInit): Promise<IMangaWithVolume> {
-  const result = await fetcher(END_POINTS.manga.getMangaById.replace(':id', id), { ...params }, config);
+  const result = await fetcher(
+    END_POINTS.manga.getMangaById.replace(':id', id),
+    { ...{ includes: ['cover_art'] }, ...params },
+    config
+  );
   return result;
 }

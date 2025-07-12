@@ -31,9 +31,9 @@ export interface IManga {
   updatedAt: string;
   status: MangaStatus;
   contentRating: ContentRating;
-    tags: IMangaTag[];
-    author: string;
-    artist: string;
+  tags: IMangaTag[];
+  author: string;
+  artist: string;
   coverArt: string;
   bookmarkedByMe: boolean;
 }
@@ -53,5 +53,12 @@ export interface IVolumeInfo {
 }
 
 export interface IMangaWithVolume extends IManga {
-  volumes: Record<string, IVolumeInfo>[];
+  volumes: {
+    volume: string;
+    chapters: {
+      chapter: string;
+      chapterId: string;
+      isUnavilable: boolean;
+    };
+  }[];
 }

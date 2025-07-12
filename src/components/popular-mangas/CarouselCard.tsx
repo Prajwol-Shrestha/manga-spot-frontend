@@ -5,6 +5,7 @@ import { ContentRatingBadge, StatusBadge } from '../CustomBadges/CustomBadges';
 import { Badge } from '../ui/Badge';
 import IconButton from '../ui/IconButton';
 import BookmarkButton from '../Buttons/BookmarkButton';
+import Link from 'next/link';
 
 interface IProps {
   manga: IMangaWithVolume;
@@ -21,9 +22,11 @@ export default function CarouselCard({ manga, index }: IProps) {
         <img src={coverArt} alt={title} className="h-full w-full rounded-md object-cover" />
       </div>
       <div className="h-full flex-1 space-y-3.5 py-4 pr-8">
-        <Typography variant={'body1'} className="line-clamp-3 font-semibold">
-          {title}
-        </Typography>
+        <Link href={`/manga/${id}`}>
+          <Typography variant={'body1'} className="line-clamp-3 font-semibold">
+            {title}
+          </Typography>
+        </Link>
         <div className="flex flex-wrap items-center gap-2">
           {status && <StatusBadge status={status} />}
           {contentRating && <ContentRatingBadge rating={contentRating} />}
