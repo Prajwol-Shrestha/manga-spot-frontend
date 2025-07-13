@@ -11,6 +11,8 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
   const cookieStore = await cookies()
   const cookieHeader = cookieStore.toString()
 
+  const isLoggedIn = cookieStore.get('access_token')
+
   const config: RequestInit = {
     ...(cookieHeader && {
       headers: {
@@ -103,7 +105,9 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
             })}
           </div>
 
-          <BookmarkButton type="button" manga={mangaData} />
+          {isLoggedIn && (
+            <BookmarkButton type="button" manga={mangaData} />
+          )}
         </div>
       </div>
 

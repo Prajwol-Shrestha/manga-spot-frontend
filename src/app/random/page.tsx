@@ -12,6 +12,7 @@ import NoCoverImage from '@/components/NoData/NoCoverImage';
 export default async function Page() {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
+  const isLoggedIn = cookieStore.get('access_token')
 
   const config: RequestInit = {
     ...(cookieHeader && {
@@ -83,7 +84,9 @@ export default async function Page() {
                   additionalClassNames="rounded-md bg-primary hover:bg-primary/80"
                 />
               </Link>
-              <BookmarkButton type="button" manga={data} />
+              {isLoggedIn && (
+                <BookmarkButton type="button" manga={data} />
+              )}
             </div>
 
             {/* Tags */}

@@ -1,3 +1,4 @@
+import { END_POINTS } from '@/constants/endpoints';
 import buildQueryParams from './buildQueryParams';
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -36,6 +37,16 @@ export default async function fetcher(url: string, queryParams?: Record<string, 
         errorBody = await response.json();
       } catch (e) {
         errorBody = { message: 'Unknown error', statusCode: response.status };
+      }
+
+      if (response.status === 401) {
+        await fetch(`${baseURL}${END_POINTS.auth.logout}`, { method: 'POST', credentials: 'include' });
+
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
+
+        throw new Error('Unauthorized - Redirecting to login');
       }
 
       throw new Error(errorBody.message || `HTTP error! Status: ${response.status}`);

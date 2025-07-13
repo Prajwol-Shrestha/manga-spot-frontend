@@ -21,6 +21,7 @@ const queryParams = {
 export default async function PopularMangasCarousel() {
   const cookieStore =await cookies()
   const cookieHeader = cookieStore.toString()
+  const isLoggedIn = cookieStore.get('access_token')
 
   const config: RequestInit = {
     ...(cookieHeader && {
@@ -44,7 +45,7 @@ export default async function PopularMangasCarousel() {
           {popularMangas?.map((manga, index: number) => (
             <CarouselItem key={manga.id}>
               {' '}
-              <CarouselCard manga={manga} index={index} />{' '}
+              <CarouselCard manga={manga} index={index} isLoggedIn={isLoggedIn} />{' '}
             </CarouselItem>
           ))}
         </CarouselContent>

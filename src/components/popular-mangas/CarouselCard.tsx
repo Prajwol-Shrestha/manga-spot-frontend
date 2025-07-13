@@ -1,4 +1,4 @@
-import { IMangaWithVolume } from '@/types/manga';
+import { IManga } from '@/types/manga';
 import React from 'react';
 import Typography from '../ui/Typography';
 import { ContentRatingBadge, StatusBadge } from '../CustomBadges/CustomBadges';
@@ -9,11 +9,12 @@ import Link from 'next/link';
 import NoCoverImage from '../NoData/NoCoverImage';
 
 interface IProps {
-  manga: IMangaWithVolume;
+  manga: IManga;
   index: number;
+  isLoggedIn?: boolean;
 }
 
-export default function CarouselCard({ manga, index }: IProps) {
+export default function CarouselCard({ manga, index, isLoggedIn }: IProps) {
   const { id, title, description, status, contentRating, tags, coverArt, author } = manga;
   const rank = index + 1;
 
@@ -52,7 +53,9 @@ export default function CarouselCard({ manga, index }: IProps) {
               additionalClassNames="rounded-xl text-secondary-600"
             />
           </Link>
-          <BookmarkButton manga={manga} type="button" />
+          {isLoggedIn && (
+            <BookmarkButton manga={manga} type="button" />
+          )}
         </div>
         <div className="mt-auto flex items-center justify-between gap-3">
           <Typography variant={'caption'} className="font-semibold">

@@ -1,3 +1,4 @@
+import { isLoggedIn } from '@/stores/authStore';
 import BookmarkButton from '../Buttons/BookmarkButton';
 import Typography from '../ui/Typography';
 import Link from 'next/link';
@@ -16,6 +17,7 @@ interface Manga {
 }
 
 export default function SearchMangaCard({ manga }: { manga: Manga }) {
+  const isSignedIn = isLoggedIn()
   return (
     <div className="flex max-w-xl gap-4 rounded-2xl bg-white p-4 shadow-md dark:bg-zinc-900">
       <img
@@ -35,7 +37,9 @@ export default function SearchMangaCard({ manga }: { manga: Manga }) {
         </div>
         <div className="mt-2 flex items-center justify-between">
           <span className="rounded-full bg-zinc-200 px-2 py-1 text-xs dark:bg-zinc-700">{manga.contentRating}</span>
-          <BookmarkButton type="icon" manga={manga} />
+          {isSignedIn && (
+            <BookmarkButton type="icon" manga={manga} />
+          )}
         </div>
       </div>
     </div>
