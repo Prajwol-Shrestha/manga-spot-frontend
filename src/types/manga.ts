@@ -62,3 +62,13 @@ export interface IMangaWithVolume extends IManga {
     };
   }[];
 }
+
+
+export interface IGetMangaResponse{
+  data: IManga[];
+  limit: number;
+  offset: number;
+  response: string;
+  result: string;
+  total: number;
+}

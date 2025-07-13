@@ -11,6 +11,7 @@ interface IconButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon: any;
   text?: string;
   additionalClassNames?: string;
+  iconClassName?: string;
 }
 
 export default function IconButton({
@@ -19,6 +20,7 @@ export default function IconButton({
   text,
   variant,
   additionalClassNames,
+  iconClassName,
   onClick,
 }: IconButtonProps) {
   return (
@@ -27,9 +29,9 @@ export default function IconButton({
       className={cn(`flex items-center justify-between gap-2 text-xs`, additionalClassNames)}
       onClick={onClick}
     >
-      {icon && iconPlacement === 'left' && <Icon icon={icon} fontSize={'2rem'} />}
+      {icon && iconPlacement === 'left' && <Icon icon={icon} fontSize={'2rem'} className={iconClassName} />}
       {text}
-      {icon && iconPlacement === 'right' && <Icon icon={icon} fontSize={'2rem'} />}
+      {icon && iconPlacement === 'right' && <Icon icon={icon} fontSize={'2rem'} className={iconClassName} />}
     </Button>
   );
 }

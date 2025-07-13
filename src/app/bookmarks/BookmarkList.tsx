@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import { getAllBookmarks } from '@/services/bookmarks-service/bookmarksService';
-import { IBookmarkResponse } from '@/types/bookmark';
 import Typography from '@/components/ui/Typography';
 import BookmarkCard from '@/components/bookmarks/BookmarkCard';
 import {
@@ -14,41 +12,25 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/Pagination';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useBookmarks from '@/hooks/useBookmarks';
 
 const LIMIT = 15;
 
 export default function BookmarkList() {
-  const [bookmarksData, setBookmarksData] = useState<IBookmarkResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
   const [page, setPage] = useState(1);
-
-  const totalCount = bookmarksData?.total;
-  const totalPages = Math.ceil(totalCount! / LIMIT) || 0;
-
   const queryParms = {
     limit: LIMIT,
     offset: (page - 1) * LIMIT,
   };
 
+  const { isLoading, bookmarks, totalCount, isEmpty } = useBookmarks(queryParms);
+  const totalPages = Math.ceil(totalCount! / LIMIT) || 0;
+
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setPage(page);
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchBookmarks = async () => {
-      const result = await getAllBookmarks(undefined, queryParms);
-      setIsLoading(false);
-      setBookmarksData(result);
-    };
-    fetchBookmarks();
-  }, [page]);
-
-  const isEmpty = bookmarksData?.data.length === 0;
-  const bookmarks = bookmarksData?.data || [];
 
   return (
     <>

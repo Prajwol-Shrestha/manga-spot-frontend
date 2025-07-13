@@ -17,7 +17,6 @@ const ratingToVariant: Record<ContentRating, BadgeProps['variant']> = {
 
 
 export function StatusBadge({ status }: { status: MangaStatus }) {
-  console.log(status, 'status')
   return <Badge variant={statusToVariant[status]}>{status}</Badge>;
 }
 

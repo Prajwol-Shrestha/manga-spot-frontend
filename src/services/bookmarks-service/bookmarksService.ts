@@ -1,12 +1,7 @@
 import { END_POINTS } from '@/constants/endpoints';
 import fetcher from '@/lib/fetcher';
 
-interface IQueryParams {
-  offset: number;
-  limit: number;
-}
-
-export async function getAllBookmarks(cookieHeader?: string, queryParams?: IQueryParams) {
+export async function getAllBookmarks(cookieHeader?: string, queryParams?: Record<string, any>) {
   const headers: RequestInit = {
     ...(cookieHeader && {
       headers: {

@@ -1,6 +1,6 @@
 import { END_POINTS } from '@/constants/endpoints';
 import fetcher from '@/lib/fetcher';
-import { IMangaWithVolume } from '@/types/manga';
+import { IGetMangaResponse, IMangaWithVolume } from '@/types/manga';
 
 export async function getRandomManga(config?: RequestInit): Promise<IMangaWithVolume> {
   const result = await fetcher(
@@ -14,8 +14,9 @@ export async function getRandomManga(config?: RequestInit): Promise<IMangaWithVo
   return result;
 }
 
-export async function getMangas(params?: any, config?: RequestInit): Promise<IMangaWithVolume[]> {
-  const result = await fetcher(END_POINTS.manga.getMangas, { ...params }, config);
+export async function getMangas(params?: any, config?: RequestInit): Promise<IGetMangaResponse> {
+  const result = await fetcher(END_POINTS.manga.getMangas, { ...params, ...{ includes: ['cover_art'] } }, config);
+  console.log(result, 'result')
   return result;
 }
 

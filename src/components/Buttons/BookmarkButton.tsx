@@ -36,7 +36,8 @@ export default function BookmarkButton({ className, type = 'button', manga }: IP
         '!bg-transparent hover:!bg-transparent !p-2': type === 'icon',
       })}
       text={type === 'icon' ? '' : isBookmarked ? 'Bookmarked' : 'Bookmark'}
-      icon={isBookmarked ? 'material-symbols:bookmark' : 'material-symbols:bookmark-outline'}
+      icon={isBookmarked ? 'bi:bookmark-check' : 'bi:bookmark'}
+      iconClassName={cn({ 'text-yellow-400': isBookmarked })}
       iconPlacement="right"
     />
   );
