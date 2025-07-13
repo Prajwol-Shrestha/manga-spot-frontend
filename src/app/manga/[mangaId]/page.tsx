@@ -28,7 +28,7 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
 
 
   return (
-    <section className="container mx-auto max-w-5xl space-y-10 px-4 py-12">
+    <main className="page-container max-w-5xl space-y-10 px-4 py-12">
       {/* Title & Meta */}
       <div className="flex flex-col gap-8 md:flex-row">
         {/* Cover */}
@@ -126,6 +126,6 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 }

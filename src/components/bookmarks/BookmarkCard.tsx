@@ -1,4 +1,4 @@
-import IBookmark from '@/types/bookmark'
+import {IBookmark} from '@/types/bookmark'
 import React from 'react'
 import Typography from '../ui/Typography'
 import { getLongDate } from '@/lib/date-helper'
@@ -6,7 +6,7 @@ import BookmarkButton from '../Buttons/BookmarkButton'
 
 
 export default function BookmarkCard({ bookmark }: { bookmark: IBookmark }) {
-  const { title, coverArt, mangaId, createdAt, id } = bookmark
+  const { title, coverArt, mangaId, createdAt } = bookmark
   const formattedDate = getLongDate(createdAt)
 
   const manga = {
@@ -30,7 +30,7 @@ export default function BookmarkCard({ bookmark }: { bookmark: IBookmark }) {
         </div>
       </div>
       <div>
-        <BookmarkButton type='icon' manga={manga} bookmarkId={id} />
+        <BookmarkButton type='icon' manga={manga} />
       </div>
     </div>
   )

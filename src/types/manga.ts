@@ -1,13 +1,13 @@
 export enum MangaStatus {
-  ONGOING = 'Ongoing',
-  COMPLETED = 'Completed',
-  CANCELLED = 'Cancelled',
-  HIATUS = 'Hiatus',
+  ONGOING = 'ongoing',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+  HIATUS = 'hiatus',
 }
 
 export enum ContentRating {
-  SAFE = 'Safe',
-  SUGGESTIVE = 'Suggestive',
+  SAFE = 'safe',
+  SUGGESTIVE = 'suggestive',
   EROTICA = 'erotica',
   PORNOGRAPHIC = 'pornographic',
 }

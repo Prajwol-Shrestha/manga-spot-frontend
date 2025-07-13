@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ThemeToggler } from './ThemeToggler';
-import { navItems } from '@/constants/nav-items';
+import { getNavItems, navItems } from '@/constants/nav-items';
 import Typography from '../ui/Typography';
 import { Button } from '../ui/Button';
 import useAuthStore, { isLoggedIn } from '@/stores/authStore';
@@ -17,6 +17,8 @@ export default function Navbar() {
 
   const showLogin = !isLoggedIn();
   const showLogOut = isLoggedIn();
+
+  const navItems = getNavItems()
 
   const stickyStyle = ['sticky', 'top-[8px]', 'backdrop-blur-sm', 'shadow-md'];
 

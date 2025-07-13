@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: Promise<{ mangaId: stri
   const pages = data.images || [];
 
   return (
-    <section className="container max-w-3xl px-4 py-12">
+    <main className="page-container max-w-3xl px-4 py-12">
       {/* Header */}
       <div className="mb-10 text-center space-y-1">
         <Typography variant="h6" className="font-bold">
@@ -85,6 +85,6 @@ export default async function Page({ params }: { params: Promise<{ mangaId: stri
           )}
         </div>
       </div>
-    </section>
+    </main>
   );
 }

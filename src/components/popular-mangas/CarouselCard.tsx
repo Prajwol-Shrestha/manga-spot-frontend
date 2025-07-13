@@ -27,11 +27,9 @@ export default function CarouselCard({ manga, index }: IProps) {
         )}
       </div>
       <div className="h-full flex-1 space-y-3.5 py-4 pr-8">
-        <Link href={`/manga/${id}`}>
-          <Typography variant={'body1'} className="line-clamp-3 font-semibold">
-            {title}
-          </Typography>
-        </Link>
+        <Typography variant={'body1'} className="line-clamp-3 font-semibold">
+          {title}
+        </Typography>
         <div className="flex flex-wrap items-center gap-2">
           {status && <StatusBadge status={status} />}
           {contentRating && <ContentRatingBadge rating={contentRating} />}
@@ -45,13 +43,15 @@ export default function CarouselCard({ manga, index }: IProps) {
           {description}
         </Typography>
         <div className="flex items-center gap-2">
-          <IconButton
-            variant={'default'}
-            text="Read Now"
-            icon={'system-uicons:book-text'}
-            iconPlacement={'left'}
-            additionalClassNames="rounded-xl text-secondary-600"
-          />
+          <Link href={`/manga/${id}`}>
+            <IconButton
+              variant={'default'}
+              text="Read Now"
+              icon={'system-uicons:book-text'}
+              iconPlacement={'left'}
+              additionalClassNames="rounded-xl text-secondary-600"
+            />
+          </Link>
           <BookmarkButton manga={manga} type="button" />
         </div>
         <div className="mt-auto flex items-center justify-between gap-3">

@@ -38,7 +38,7 @@ export default async function Page() {
   } = data ?? {};
 
   return (
-    <section className="relative bg-[url('/assets/hero-bg.jpg')] bg-cover bg-center py-10">
+    <main className="page-container relative bg-[url('/assets/hero-bg.jpg')] bg-cover bg-center py-10">
       <div className="container mx-auto max-w-6xl rounded-xl bg-black/70 p-6 backdrop-blur-md shadow-lg text-white">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {/* LEFT: COVER */}
@@ -100,6 +100,6 @@ export default async function Page() {
           </div>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

@@ -1,5 +1,5 @@
 import { getAllBookmarks } from '@/services/bookmarks-service/bookmarksService';
-import IBookmark from '@/types/bookmark';
+import {IBookmark, IBookmarkResponse} from '@/types/bookmark';
 import { cookies } from 'next/headers';
 import React from 'react';
 import Typography from '../ui/Typography';
@@ -15,8 +15,9 @@ interface IProps{
 export default async function BookmarksSection({className}: IProps) {
   const cookieStore = cookies();
   const cookieHeader = (await cookieStore).toString();
-  const bookmarks: IBookmark[] = (await getAllBookmarks(cookieHeader)) || [];
+  const bookmarkData: IBookmarkResponse = (await getAllBookmarks(cookieHeader)) || [];
 
+  const bookmarks: IBookmark[] = bookmarkData.data;
   const isEmpty = bookmarks.length === 0;
   const fiveBookmarks = bookmarks.slice(0, 5);
 

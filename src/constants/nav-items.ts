@@ -1,15 +1,56 @@
+import { isLoggedIn } from '@/stores/authStore';
 
-export const navItems = [
+export const getNavItems = () => {
+  const loggedIn = isLoggedIn();
+
+  const navItems = [
     {
-        title: 'Home',
-        link: '/'
+      title: 'Home',
+      link: '/',
+      show: true,
     },
     {
-        title: 'Random',
-        link: '/random'
+      title: 'Random',
+      link: '/random',
+      show: true,
     },
     {
-        title: 'Bookmarks',
-        link: '/bookmarks'
-    }
-]
+      title: 'Browse',
+      link: '/browse',
+      show: true,
+    },
+    {
+      title: 'Genres',
+      link: '/genres',
+      show: true,
+    },
+    {
+      title: 'Bookmarks',
+      link: '/bookmarks',
+      show: loggedIn,
+    },
+    {
+      title: 'History',
+      link: '/history',
+      show: loggedIn,
+    },
+    // {
+    //   title: 'Settings',
+    //   link: '/settings',
+    //   show: loggedIn,
+    // },
+    // {
+    //   title: 'About',
+    //   link: '/about',
+    //   show: true,
+    // },
+    // {
+    //   title: 'Contact',
+    //   link: '/contact',
+    //   show: true,
+    // },
+  ];
+
+  const shownNavItems = navItems.filter((item) => item.show);
+  return shownNavItems;
+};
