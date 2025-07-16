@@ -25,9 +25,8 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      const data = await fetcher(END_POINTS.auth.login,undefined, {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
+      const data = await fetcher(END_POINTS.auth.login, {
+        config: { method: 'POST', body: JSON.stringify({ username, password }) },
       });
       const { accessToken, ...user } = data;
 

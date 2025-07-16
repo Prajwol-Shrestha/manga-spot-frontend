@@ -14,11 +14,13 @@ export async function addBookmark(body: { mangaId: string; coverArt: string; tit
     body: JSON.stringify(body),
     ...(cookieHeader && {
       headers: {
-        Cookie: cookieHeader,
-      },
-    }),
+        Cookie: cookieHeader
+      }
+    })
   };
-  const result = await fetcher(END_POINTS.bookmarks.addBookmark, undefined, config);
+  const result = await fetcher(END_POINTS.bookmarks.addBookmark, {
+    config,
+  });
   revalidateTag('bookmarks');
   return result;
 }

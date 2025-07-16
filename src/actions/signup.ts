@@ -2,7 +2,6 @@
 
 import { END_POINTS } from '@/constants/endpoints';
 import fetcher from '@/lib/fetcher';
-import { cookies } from 'next/headers';
 
 export async function signup(prevState: { error?: string } | undefined, formData: FormData) {
   const username = formData.get('username');
@@ -11,12 +10,11 @@ export async function signup(prevState: { error?: string } | undefined, formData
   const name = formData.get('name');
 
   try {
-    const data = await fetcher(END_POINTS.auth.signup, undefined, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const data = await fetcher(END_POINTS.auth.signup, {
+      config: {
+        method: 'POST',
+        body: JSON.stringify({ username, password, email, name }),
       },
-      body: JSON.stringify({ username, password, email, name }),
     });
 
     return { success: true, data: data };

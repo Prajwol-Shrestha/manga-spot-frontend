@@ -11,7 +11,7 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
   const cookieStore = await cookies()
   const cookieHeader = cookieStore.toString()
 
-  const isLoggedIn = cookieStore.get('access_token')
+  const isLoggedIn = cookieStore.get('accessToken')
 
   const config: RequestInit = {
     ...(cookieHeader && {

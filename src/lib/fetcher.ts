@@ -1,18 +1,25 @@
 import { END_POINTS } from '@/constants/endpoints';
 import buildQueryParams from './buildQueryParams';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const defaultConfig: RequestInit = {
-  cache: 'force-cache',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json',
-  }
+export const defaultHeaders: HeadersInit = {
+  'Content-Type': 'application/json',
 };
 
-// @eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function fetcher(url: string, queryParams?: Record<string, any>, config: RequestInit = {}) {
+// Core fetcher with optional accessToken
+export default async function fetcher<T = unknown>(
+  url: string,
+  {
+    queryParams,
+    config = {},
+    accessToken,
+  }: {
+    queryParams?: Record<string, any>;
+    config?: RequestInit;
+    accessToken?: string;
+  } = {}
+): Promise<T> {
   try {
     const endpoint = new URL(`${baseURL}${url}`);
 
@@ -22,12 +29,13 @@ export default async function fetcher(url: string, queryParams?: Record<string, 
     }
 
     const response = await fetch(endpoint.toString(), {
-      ...defaultConfig,
       ...config,
+      cache: 'force-cache',
+      credentials: 'include',
       headers: {
-        ...defaultConfig.headers,
-        ...config.headers,
-        // Authorization: accessToken ? `Bearer ${accessToken}` : '',
+        ...defaultHeaders,
+        ...(config.headers || {}),
+        ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
       },
     });
 
@@ -40,24 +48,26 @@ export default async function fetcher(url: string, queryParams?: Record<string, 
       }
 
       if (response.status === 401) {
-        await fetch(`${baseURL}${END_POINTS.auth.logout}`, { method: 'POST', credentials: 'include' });
-
+        // Auto logout and redirect (only client-side)
         if (typeof window !== 'undefined') {
+          await fetch(`${baseURL}${END_POINTS.auth.logout}`, {
+            method: 'POST',
+            credentials: 'include',
+          });
           window.location.href = '/login';
         }
-
         throw new Error('Unauthorized - Redirecting to login');
       }
 
       throw new Error(errorBody.message || `HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     if (error instanceof Error) {
       console.error('Fetch error:', error.message);
       throw new Error(error.message || 'An error occurred while fetching data.');
     }
+    throw error;
   }
 }

@@ -33,12 +33,9 @@ export default function RegisterForm() {
 
     try {
       setLoading(true);
-      const data = await fetcher(END_POINTS.auth.signup, undefined, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password, email, name }),
+      const data = await fetcher(END_POINTS.auth.signup, {
+        config: {method: 'POST',
+        body: JSON.stringify({ username, password, email, name }),}
       });
 
       const { accessToken, ...user } = data;

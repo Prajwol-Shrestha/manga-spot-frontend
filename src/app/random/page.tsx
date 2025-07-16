@@ -12,7 +12,7 @@ import NoCoverImage from '@/components/NoData/NoCoverImage';
 export default async function Page() {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
-  const isLoggedIn = cookieStore.get('access_token')
+  const isLoggedIn = cookieStore.get('accessToken')
 
   const config: RequestInit = {
     ...(cookieHeader && {

@@ -31,3 +31,7 @@ export function debounce<T extends (...args: any[]) => void>(func: T, timeout = 
 
   return debounced;
 }
+
+export const isServer = () => {
+  return typeof window === 'undefined';
+}

@@ -33,12 +33,12 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NuqsAdapter>
-            <div className="flex min-h-screen flex-col justify-between">
-              <Header />
-              <>{children}</>
-              <Footer />
-            </div>
-            <Toaster />
+              <div className="flex min-h-screen flex-col justify-between">
+                <Header />
+                <>{children}</>
+                <Footer />
+              </div>
+              <Toaster />
           </NuqsAdapter>
         </ThemeProvider>
       </body>

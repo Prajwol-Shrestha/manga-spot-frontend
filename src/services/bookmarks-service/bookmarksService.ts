@@ -12,6 +12,9 @@ export async function getAllBookmarks(cookieHeader?: string, queryParams?: Recor
       tags: ['bookmarks'],
     },
   };
-  const result = await fetcher(END_POINTS.bookmarks.getBookmarks, queryParams, headers);
+  const result = await fetcher(END_POINTS.bookmarks.getBookmarks, {
+    queryParams,
+    
+  });
   return result;
 }

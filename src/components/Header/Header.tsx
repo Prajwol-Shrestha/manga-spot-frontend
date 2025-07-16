@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ThemeToggler } from './ThemeToggler';
-import { getNavItems, navItems } from '@/constants/nav-items';
+import { getNavItems, } from '@/constants/nav-items';
 import Typography from '../ui/Typography';
 import { Button } from '../ui/Button';
 import useAuthStore, { isLoggedIn } from '@/stores/authStore';
@@ -35,7 +35,7 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
