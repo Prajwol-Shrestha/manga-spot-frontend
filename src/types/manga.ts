@@ -1,3 +1,5 @@
+import { IMangaTag } from "./tag";
+
 export enum MangaStatus {
   ONGOING = 'ongoing',
   COMPLETED = 'completed',
@@ -12,13 +14,6 @@ export enum ContentRating {
   PORNOGRAPHIC = 'pornographic',
 }
 
-export interface IMangaTag {
-  id: string;
-  type: string;
-  group: string;
-  name: string;
-  description?: string;
-}
 
 export interface IManga {
   id: string;

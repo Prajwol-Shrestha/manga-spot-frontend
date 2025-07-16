@@ -13,6 +13,9 @@ export const END_POINTS = {
     getMangaById: '/manga/:id',
     getLatestUpdatedChapters: '/manga/latest-updated-chapters',
   },
+  tags: {
+    getAlltags: '/tags'
+  },
   bookmarks: {
     getBookmarks: '/bookmarks',
     addBookmark: '/bookmarks',

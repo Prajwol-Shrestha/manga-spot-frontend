@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Typography from '../ui/Typography';
-import { IMangaTag } from '@/types/manga';
+import { IMangaTag } from '@/types/tag';
 
 export default function Tag({ tag }: { tag: IMangaTag }) {
     const { id, name } = tag ?? {};
