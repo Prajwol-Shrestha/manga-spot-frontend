@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="page-container space-y-8">
       <PopularMangasCarousel />
-      <LatestUpdated className="bg-secondary-600 rounded-md px-8 py-6" />
+      <LatestUpdated className="bg-background rounded-md px-8 py-6" />
     </main>
   );
 }
