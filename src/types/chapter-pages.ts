@@ -1,6 +1,10 @@
+import { IManga, IMangaWithVolume } from "./manga";
 
 export interface IChapterPages{
-    images: string[];
     result: string;
     count: number;
+    data: {
+        chapterImages: string[];
+        mangaDetails: IMangaWithVolume;
+    }
 }

@@ -31,7 +31,7 @@ export const getNavItems = () => {
     },
     {
       title: 'History',
-      link: '/history',
+      link: '/reading-history',
       show: loggedIn,
     },
     // {

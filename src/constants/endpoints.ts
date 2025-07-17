@@ -23,5 +23,8 @@ export const END_POINTS = {
   },
   "chapter-pages": {
     getChapterPages: '/chapter-pages/:chapterId' 
+  },
+  "reading-history": {
+    getReadingHistory: '/reading-history'
   }
 };
