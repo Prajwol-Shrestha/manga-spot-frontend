@@ -21,7 +21,7 @@ const queryParams = {
 export default async function PopularMangasCarousel() {
   const cookieStore =await cookies()
   const cookieHeader = cookieStore.toString()
-  const isLoggedIn = cookieStore.get('accessToken')
+  const isLoggedIn = !!cookieStore.get('accessToken')
 
   const config: RequestInit = {
     ...(cookieHeader && {

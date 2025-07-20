@@ -1,30 +1,32 @@
 export const END_POINTS = {
   auth: {
-    login: '/auth/login',
-    signup: '/auth/signup',
-    logout: '/auth/logout',
+    login: '/api/auth/login',
+    signup: '/api/auth/signup',
+    logout: '/api/auth/logout',
   },
   user: {
-    me: '/user/me',
+    me: '/api/user/me',
   },
   manga: {
-    getMangas: '/manga',
-    getRandomManga: '/manga/random',
-    getMangaById: '/manga/:id',
-    getLatestUpdatedChapters: '/manga/latest-updated-chapters',
+    getMangas: '/api/manga',
+    getRandomManga: '/api/manga/random',
+    getMangaById: '/api/manga/:id',
   },
   tags: {
-    getAlltags: '/tags'
+    getAlltags: '/api/tags'
   },
   bookmarks: {
-    getBookmarks: '/bookmarks',
-    addBookmark: '/bookmarks',
-    removeBookmark: '/bookmarks/:id',
+    getBookmarks: '/api/bookmarks',
+    addBookmark: '/api/bookmarks',
+    removeBookmark: '/api/bookmarks/:id',
+  },
+  chapters: {
+    getLatestUpdatedChapters: '/api/chapters/latest-updated',
   },
   "chapter-pages": {
-    getChapterPages: '/chapter-pages/:chapterId' 
+    getChapterPages: '/api/chapter-pages/:chapterId' 
   },
   "reading-history": {
-    getReadingHistory: '/reading-history'
+    getReadingHistory: '/api/reading-history'
   }
 };
