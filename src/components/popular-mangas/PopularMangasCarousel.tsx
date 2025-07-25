@@ -1,4 +1,4 @@
-import { getMangas } from '@/services/manga-service/mangaGetService';
+import { getMangas } from '@/services/mangaGetService';
 import dayjs from 'dayjs';
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/Carousel';

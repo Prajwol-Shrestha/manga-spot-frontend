@@ -1,4 +1,4 @@
-import { getAllBookmarks } from '@/services/bookmarks-service/bookmarksService';
+import { getAllBookmarks } from '@/services/bookmarksService';
 import {IBookmark, IBookmarkResponse} from '@/types/bookmark';
 import { cookies } from 'next/headers';
 import React from 'react';

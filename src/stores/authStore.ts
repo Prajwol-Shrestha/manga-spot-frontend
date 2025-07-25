@@ -27,6 +27,5 @@ const useAuthStore = create<AuthStore>()(
   )
 );
 
-export const isLoggedIn = () => useAuthStore.getState().user
 
 export default useAuthStore;

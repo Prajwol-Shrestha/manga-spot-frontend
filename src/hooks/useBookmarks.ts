@@ -1,4 +1,4 @@
-import { getAllBookmarks } from '@/services/bookmarks-service/bookmarksService';
+import { getAllBookmarks } from '@/services/bookmarksService';
 import { IBookmarkResponse } from '@/types/bookmark';
 import { useEffect, useState } from 'react';
 

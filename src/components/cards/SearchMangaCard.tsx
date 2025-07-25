@@ -1,7 +1,7 @@
-import { isLoggedIn } from '@/stores/authStore';
 import BookmarkButton from '../Buttons/BookmarkButton';
 import Typography from '../ui/Typography';
 import Link from 'next/link';
+import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 
 interface Manga {
   id: string;
@@ -17,7 +17,7 @@ interface Manga {
 }
 
 export default function SearchMangaCard({ manga }: { manga: Manga }) {
-  const isSignedIn = isLoggedIn()
+  const isSignedIn =  useIsLoggedIn()
   return (
     <div className="flex max-w-xl gap-4 rounded-2xl bg-white p-4 shadow-md dark:bg-zinc-900">
       <img

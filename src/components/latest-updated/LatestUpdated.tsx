@@ -1,4 +1,4 @@
-import { getLatestUpdatedChapters } from '@/services/chapters-service/chaptersGetService';
+import { getLatestUpdatedChapters } from '@/services/chaptersGetService';
 import React from 'react';
 import Typography from '../ui/Typography';
 import { cn } from '@/lib/utils';

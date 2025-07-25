@@ -22,9 +22,7 @@ export const END_POINTS = {
   },
   chapters: {
     getLatestUpdatedChapters: '/api/chapters/latest-updated',
-  },
-  "chapter-pages": {
-    getChapterPages: '/api/chapter-pages/:chapterId' 
+    chapterPages: '/api/chapters/:chapterId',
   },
   "reading-history": {
     getReadingHistory: '/api/reading-history'

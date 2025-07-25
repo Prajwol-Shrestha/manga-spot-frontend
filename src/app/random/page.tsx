@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { getRandomManga } from '@/services/manga-service/mangaGetService';
+import { getRandomManga } from '@/services/mangaGetService';
 
 import Typography from '@/components/ui/Typography';
 import IconButton from '@/components/ui/IconButton';

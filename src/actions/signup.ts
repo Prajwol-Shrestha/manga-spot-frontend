@@ -1,7 +1,7 @@
 'use server';
 
 import { END_POINTS } from '@/constants/endpoints';
-import fetcher from '@/lib/fetcher';
+import universalFetcher from '@/lib/fetcher';
 
 export async function signup(prevState: { error?: string } | undefined, formData: FormData) {
   const username = formData.get('username');
@@ -10,7 +10,7 @@ export async function signup(prevState: { error?: string } | undefined, formData
   const name = formData.get('name');
 
   try {
-    const data = await fetcher(END_POINTS.auth.signup, {
+    const data = await universalFetcher(END_POINTS.auth.signup, {
       config: {
         method: 'POST',
         body: JSON.stringify({ username, password, email, name }),

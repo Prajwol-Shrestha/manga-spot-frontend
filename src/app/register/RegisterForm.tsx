@@ -9,8 +9,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import fetcher from '@/lib/fetcher';
 import { END_POINTS } from '@/constants/endpoints';
+import universalFetcher from '@/lib/fetcher';
 
 export default function RegisterForm() {
   const { setUser } = useAuthStore();
@@ -33,7 +33,7 @@ export default function RegisterForm() {
 
     try {
       setLoading(true);
-      const data = await fetcher(END_POINTS.auth.signup, {
+      const data = await universalFetcher(END_POINTS.auth.signup, {
         config: {method: 'POST',
         body: JSON.stringify({ username, password, email, name }),}
       });

@@ -2,23 +2,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ThemeToggler } from './ThemeToggler';
-import { getNavItems, } from '@/constants/nav-items';
+import { getNavItems } from '@/constants/nav-items';
 import Typography from '../ui/Typography';
 import { Button } from '../ui/Button';
-import useAuthStore, { isLoggedIn } from '@/stores/authStore';
 import { toast } from 'sonner';
-import fetcher from '@/lib/fetcher';
-import { END_POINTS } from '@/constants/endpoints';
+import { logout } from '@/helpers/logout';
+import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 
 export default function Navbar() {
-  const { logout } = useAuthStore();
   const [showNavbar, setShowNavbar] = useState(false);
   const navbarRef = useRef(null);
 
-  const showLogin = !isLoggedIn();
-  const showLogOut = isLoggedIn();
+  const isLoggedIn = useIsLoggedIn();
+  console.log({ isLoggedIn });
 
-  const navItems = getNavItems()
+  const navItems = getNavItems();
 
   const stickyStyle = ['sticky', 'top-[8px]', 'backdrop-blur-sm', 'shadow-md'];
 
@@ -35,19 +33,17 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-    window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const handleLogout = async () => {
     try {
-      await fetcher(END_POINTS.auth.logout)
-      logout();
+      await logout();
       toast.success('Logged out!');
     } catch (err) {
       console.log(err);
     }
-
   };
 
   return (
@@ -86,15 +82,14 @@ export default function Navbar() {
         </ul>
         <div className="hidden lg:flex lg:gap-4">
           <div className="flex items-center gap-2">
-            {showLogin && (
+            {!isLoggedIn ? (
               <Link href={'/login'}>
                 <Button variant={'default'} size={'sm'} className="py-2">
                   {' '}
                   Login{' '}
                 </Button>
               </Link>
-            )}
-            {showLogOut && (
+            ) : (
               <Button onClick={handleLogout} variant={'default'} size={'sm'} className="w-full py-2">
                 {' '}
                 Logout{' '}
@@ -124,15 +119,14 @@ export default function Navbar() {
             ))}
             <div className="flex flex-col gap-2">
               <>
-                {showLogin && (
+                {!isLoggedIn ? (
                   <Link href={'/login'}>
                     <Button variant={'default'} size={'sm'} className="w-full py-2">
                       {' '}
                       Login{' '}
                     </Button>
                   </Link>
-                )}
-                {showLogOut && (
+                ) : (
                   <Button onClick={handleLogout} variant={'default'} size={'sm'} className="w-full py-2">
                     {' '}
                     Logout{' '}

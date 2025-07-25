@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Typography from '@/components/ui/Typography';
-import { getMangaById } from '@/services/manga-service/mangaGetService';
+import { getMangaById } from '@/services/mangaGetService';
 import { IMangaWithVolume } from '@/types/manga';
 import BookmarkButton from '@/components/Buttons/BookmarkButton';
 import { cookies } from 'next/headers';

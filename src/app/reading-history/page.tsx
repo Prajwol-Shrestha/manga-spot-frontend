@@ -1,4 +1,4 @@
-import { getReadingHistoryService } from '@/services/reading-history-service/readingHistoryService'
+import { getReadingHistoryService } from '@/services/readingHistoryService'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'

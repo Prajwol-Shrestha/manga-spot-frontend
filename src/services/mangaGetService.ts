@@ -1,9 +1,9 @@
 import { END_POINTS } from '@/constants/endpoints';
-import fetcher from '@/lib/fetcher';
+import universalFetcher from '@/lib/fetcher';
 import { IGetMangaResponse, IMangaWithVolume } from '@/types/manga';
 
 export async function getRandomManga(config?: RequestInit): Promise<IMangaWithVolume> {
-  const result = await fetcher(END_POINTS.manga.getRandomManga, {
+  const result = await universalFetcher(END_POINTS.manga.getRandomManga, {
     queryParams: { includes: ['cover_art'] },
     config: { cache: 'no-cache', ...config },
   });
@@ -11,7 +11,7 @@ export async function getRandomManga(config?: RequestInit): Promise<IMangaWithVo
 }
 
 export async function getMangas(params?: any, config?: RequestInit): Promise<IGetMangaResponse> {
-  const result = await fetcher(END_POINTS.manga.getMangas, {
+  const result = await universalFetcher(END_POINTS.manga.getMangas, {
     queryParams: { ...params, ...{ includes: ['cover_art'] } },
     config,
   });
@@ -19,7 +19,7 @@ export async function getMangas(params?: any, config?: RequestInit): Promise<IGe
 }
 
 export async function getMangaById(id: string, params?: any, config?: RequestInit): Promise<IMangaWithVolume> {
-  const result = await fetcher(END_POINTS.manga.getMangaById.replace(':id', id), {
+  const result = await universalFetcher(END_POINTS.manga.getMangaById.replace(':id', id), {
     queryParams: { ...{ includes: ['cover_art'] }, ...params },
     config,
   });

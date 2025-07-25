@@ -1,5 +1,5 @@
 import { cleanObj } from '@/lib/utils';
-import { getMangas } from '@/services/manga-service/mangaGetService';
+import { getMangas } from '@/services/mangaGetService';
 import { IGetMangaResponse } from '@/types/manga';
 import { useEffect, useState } from 'react';
 

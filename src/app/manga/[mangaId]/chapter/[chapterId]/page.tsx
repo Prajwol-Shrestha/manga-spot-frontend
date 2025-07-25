@@ -1,5 +1,5 @@
 import Typography from '@/components/ui/Typography';
-import { getChapterPages } from '@/services/pages-service/getChapterPages';
+import { getChapterPages } from '@/services/getChapterPages';
 import { IChapterPages } from '@/types/chapter-pages';
 import { IMangaWithVolume } from '@/types/manga';
 import React from 'react';
@@ -18,6 +18,8 @@ export default async function Page({ params }: { params: Promise<{ mangaId: stri
       },
     }),
   };
+
+  console.log(chapterId, 'chapterId');
 
   const chapterResponse: IChapterPages = await getChapterPages(chapterId, {
     mangaId: mangaId,

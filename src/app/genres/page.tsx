@@ -1,5 +1,5 @@
 import Typography from '@/components/ui/Typography'
-import { getAllTags } from '@/services/tags-service/tagGetService'
+import { getAllTags } from '@/services/tagGetService'
 import Link from 'next/link'
 import React from 'react'
 

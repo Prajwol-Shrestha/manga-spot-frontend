@@ -1,7 +1,7 @@
-import { isLoggedIn } from '@/stores/authStore';
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 
 export const getNavItems = () => {
-  const loggedIn = isLoggedIn();
+  const loggedIn = useIsLoggedIn();
 
   const navItems = [
     {
