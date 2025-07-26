@@ -2,6 +2,24 @@
 
 import { cookies } from 'next/headers';
 
+export async function setCookie(name: string, value: string) {
+  const cookieStore = await cookies();
+  cookieStore.set(name, value, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: '/',
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  });
+  return null;
+}
+
+export async function deleteCookie(name: string) {
+  const cookieStore = await cookies();
+  cookieStore.delete(name);
+  return null;
+}
+
 export async function getCookies() {
   const cookieStore = await cookies();
   return cookieStore;

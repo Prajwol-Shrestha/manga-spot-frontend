@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import { END_POINTS } from '@/constants/endpoints';
 import universalFetcher from '@/lib/fetcher';
 import { IUserWithToken } from '@/types/user';
+import { setCookie } from '@/lib/cookies';
 
 export default function RegisterForm() {
   const { setUser } = useAuthStore();
@@ -40,6 +41,8 @@ export default function RegisterForm() {
 
       const { accessToken, ...user } = data;
       setUser(user);
+
+      await setCookie('accessToken', accessToken);
 
       toast.success('Registration successful!');
       router.push('/');

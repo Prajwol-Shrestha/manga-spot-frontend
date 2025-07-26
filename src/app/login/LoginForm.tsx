@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import Typography from '@/components/ui/Typography';
 import { END_POINTS } from '@/constants/endpoints';
+import { setCookie } from '@/lib/cookies';
 import universalFetcher from '@/lib/fetcher';
 import useAuthStore from '@/stores/authStore';
 import { IUserWithToken } from '@/types/user';
@@ -32,6 +33,7 @@ export default function LoginForm() {
       const { accessToken, ...user } = data;
 
       setUser(user);
+      await setCookie('accessToken', accessToken);
 
       toast.success('Logged in successfully');
       router.push('/');
