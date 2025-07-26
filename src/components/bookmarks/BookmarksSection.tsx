@@ -5,6 +5,7 @@ import Typography from '../ui/Typography';
 import BookmarkCard from './BookmarkCard';
 import { Button } from '../ui/Button';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 interface IProps {
   className?: string;
@@ -24,7 +25,9 @@ export default async function BookmarksSection({ className }: IProps) {
           {' '}
           Bookmarks{' '}
         </Typography>
-        <Button variant={'link'}>Show All</Button>
+        <Link href={'/bookmarks'}>
+          <Button variant={'link'}>Show All</Button>
+        </Link>
       </div>
       <hr />
       <div className="mt-3 space-y-2">

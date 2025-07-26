@@ -8,10 +8,13 @@ import { Button } from '../ui/Button';
 import { toast } from 'sonner';
 import { logout } from '@/helpers/logout';
 import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
+import ProfileDropdown from './ProfileDropdown';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(false);
   const navbarRef = useRef(null);
+  const router = useRouter();
 
   const isLoggedIn = useIsLoggedIn();
 
@@ -39,6 +42,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await logout();
+      router.push('/');
       toast.success('Logged out!');
     } catch (err) {
       console.log(err);
@@ -88,15 +92,11 @@ export default function Navbar() {
                   Login{' '}
                 </Button>
               </Link>
-            ) : (
-              <Button onClick={handleLogout} variant={'default'} size={'sm'} className="w-full py-2">
-                {' '}
-                Logout{' '}
-              </Button>
-            )}
+            ) : null}
           </div>
 
           <ThemeToggler />
+          {isLoggedIn && <ProfileDropdown handleLogout={handleLogout} />}
         </div>
       </div>
       {showNavbar && (
