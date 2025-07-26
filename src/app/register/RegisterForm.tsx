@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { END_POINTS } from '@/constants/endpoints';
 import universalFetcher from '@/lib/fetcher';
-import { IUser } from '@/types/user';
+import { IUserWithToken } from '@/types/user';
 
 export default function RegisterForm() {
   const { setUser } = useAuthStore();
@@ -34,7 +34,7 @@ export default function RegisterForm() {
 
     try {
       setLoading(true);
-      const data = await universalFetcher<IUser>(END_POINTS.auth.signup, {
+      const data = await universalFetcher<IUserWithToken>(END_POINTS.auth.signup, {
         config: { method: 'POST', body: JSON.stringify({ username, password, email, name }) },
       });
 

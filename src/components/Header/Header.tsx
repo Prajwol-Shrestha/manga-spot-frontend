@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ThemeToggler } from './ThemeToggler';
-import { getNavItems } from '@/constants/nav-items';
+import { useNavItems } from '@/constants/nav-items';
 import Typography from '../ui/Typography';
 import { Button } from '../ui/Button';
 import { toast } from 'sonner';
@@ -14,9 +14,8 @@ export default function Navbar() {
   const navbarRef = useRef(null);
 
   const isLoggedIn = useIsLoggedIn();
-  console.log({ isLoggedIn });
 
-  const navItems = getNavItems();
+  const navItems = useNavItems();
 
   const stickyStyle = ['sticky', 'top-[8px]', 'backdrop-blur-sm', 'shadow-md'];
 

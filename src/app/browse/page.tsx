@@ -27,8 +27,8 @@ export default function BrowsePage() {
   const totalPages = totalCount ? Math.ceil(totalCount / LIMIT) : 1;
 
   useEffect(() => {
-    if (filters) {
-      setSearch(filters.title || '');
+    if (filters.title) {
+      setSearch(filters.title as string);
     }
   }, []);
 

@@ -1,6 +1,6 @@
-import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
+import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 
-export const getNavItems = () => {
+export const useNavItems = () => {
   const loggedIn = useIsLoggedIn();
 
   const navItems = [
