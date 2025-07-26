@@ -1,34 +1,18 @@
-import type { IManga, MangaStatus } from './manga';
-
-// export interface Manga {
-//   title: string;
-//   description: string;
-//   lastVolume: string;
-//   lastChapter: string;
-//   tags: MangaTag[];
-//   year: number;
-//   status: string;
-//   contentRating: string;
-//   createdAt: string;
-//     updatedAt: string;
-//     id: string;
-//     coverArt: string;
-//     artist: string;
-//     author: string;
-// }
+import type { IManga } from './manga';
 
 export interface ChapterData {
   id: string;
+  mangaId: string;
+  title: string;
   volume: string | null;
   chapter: string;
-  title: string;
   publishAt: string;
   readableAt: string;
   createdAt: string;
   updatedAt: string;
   pages: number;
-    manga?: IManga;
-    scanlator?: string;
+  scanlator?: string;
+  manga?: IManga;
 }
 
 export interface ChapterOutputData {

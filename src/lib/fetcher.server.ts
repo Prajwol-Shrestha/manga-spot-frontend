@@ -1,13 +1,12 @@
 'use server';
 
-import { END_POINTS } from '@/constants/endpoints';
 import { getAccessTokenFromCookie } from './cookies';
 import { baseURL, IFetcherConfig } from './fetcher';
 import { redirect } from 'next/navigation';
 import buildQueryParams from './buildQueryParams';
 import { logout } from '@/helpers/logout';
 
-export async function serverFetcher(url: string, options?: IFetcherConfig) {
+export async function serverFetcher<T = unknown>(url: string, options?: IFetcherConfig): Promise<T> {
   const { queryParams, config } = options || {};
   const accessToken = await getAccessTokenFromCookie();
   const endpoint = new URL(`${baseURL}${url}`);
@@ -26,17 +25,12 @@ export async function serverFetcher(url: string, options?: IFetcherConfig) {
     ...config,
   });
 
-
-
   if (response.status === 401) {
     await logout();
-    // await fetch(`${baseURL}${END_POINTS.auth.logout}`, {
-    //   method: 'POST',
-    // });
     return redirect('/login');
   }
 
-    if (!response.ok) {
+  if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
 

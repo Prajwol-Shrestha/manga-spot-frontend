@@ -1,20 +1,19 @@
-import { ContentRating, MangaStatus } from '@/types/manga';
+import { ContentRating, MangaStatus } from '@/types/enums';
 import { Badge, BadgeProps } from '../ui/Badge';
 
 const statusToVariant: Record<MangaStatus, BadgeProps['variant']> = {
-  [MangaStatus.COMPLETED]: 'completed',   // ✅ green
-  [MangaStatus.ONGOING]: 'ongoing',       // 🔵 blue
-  [MangaStatus.CANCELLED]: 'cancelled',   // ⚫ gray
-  [MangaStatus.HIATUS]: 'hiatus',         // 🟡 yellow
+  [MangaStatus.COMPLETED]: 'completed', // ✅ green
+  [MangaStatus.ONGOING]: 'ongoing', // 🔵 blue
+  [MangaStatus.CANCELLED]: 'cancelled', // ⚫ gray
+  [MangaStatus.HIATUS]: 'hiatus', // 🟡 yellow
 };
 
 const ratingToVariant: Record<ContentRating, BadgeProps['variant']> = {
-  [ContentRating.SAFE]: 'completed',         // ✅ green
-  [ContentRating.SUGGESTIVE]: 'hiatus',      // 🟡 yellow (cautionary)
-  [ContentRating.EROTICA]: 'destructive',    // 🔴 red
+  [ContentRating.SAFE]: 'completed', // ✅ green
+  [ContentRating.SUGGESTIVE]: 'hiatus', // 🟡 yellow (cautionary)
+  [ContentRating.EROTICA]: 'destructive', // 🔴 red
   [ContentRating.PORNOGRAPHIC]: 'destructive', // 🔴 red
 };
-
 
 export function StatusBadge({ status }: { status: MangaStatus }) {
   return <Badge variant={statusToVariant[status]}>{status}</Badge>;

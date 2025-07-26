@@ -1,21 +1,17 @@
 import { getAllBookmarks } from '@/services/bookmarksService';
-import {IBookmark, IBookmarkResponse} from '@/types/bookmark';
-import { cookies } from 'next/headers';
+import { IBookmark, IBookmarkResponse } from '@/types/bookmark';
 import React from 'react';
 import Typography from '../ui/Typography';
 import BookmarkCard from './BookmarkCard';
 import { Button } from '../ui/Button';
 import { cn } from '@/lib/utils';
 
-
-interface IProps{
-  className?: string
+interface IProps {
+  className?: string;
 }
 
-export default async function BookmarksSection({className}: IProps) {
-  const cookieStore = cookies();
-  const cookieHeader = (await cookieStore).toString();
-  const bookmarkData: IBookmarkResponse = (await getAllBookmarks(cookieHeader)) || [];
+export default async function BookmarksSection({ className }: IProps) {
+  const bookmarkData: IBookmarkResponse = (await getAllBookmarks()) || [];
 
   const bookmarks: IBookmark[] = bookmarkData.data;
   const isEmpty = bookmarks.length === 0;
@@ -23,14 +19,12 @@ export default async function BookmarksSection({className}: IProps) {
 
   return (
     <section className={cn('', className)}>
-      <div className='flex items-center justify-between gap-3'>
+      <div className="flex items-center justify-between gap-3">
         <Typography variant={'body1'} className="font-bold">
           {' '}
           Bookmarks{' '}
         </Typography>
-        <Button variant={'link'}>
-          Show All
-        </Button>
+        <Button variant={'link'}>Show All</Button>
       </div>
       <hr />
       <div className="mt-3 space-y-2">

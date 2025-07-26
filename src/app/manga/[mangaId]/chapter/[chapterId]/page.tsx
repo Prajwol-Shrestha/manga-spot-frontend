@@ -4,26 +4,12 @@ import { IChapterPages } from '@/types/chapter-pages';
 import { IMangaWithVolume } from '@/types/manga';
 import React from 'react';
 import Link from 'next/link';
-import { cookies } from 'next/headers';
 
 export default async function Page({ params }: { params: Promise<{ mangaId: string; chapterId: string }> }) {
-  const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
   const { mangaId, chapterId } = await params;
-
-  const config = {
-    ...(cookieHeader && {
-      headers: {
-        Cookie: cookieHeader,
-      },
-    }),
-  };
-
-  console.log(chapterId, 'chapterId');
-
   const chapterResponse: IChapterPages = await getChapterPages(chapterId, {
     mangaId: mangaId,
-  }, config);
+  });
 
   const images = chapterResponse.data.chapterImages || [];
   const mangaData: IMangaWithVolume = chapterResponse.data.mangaDetails;

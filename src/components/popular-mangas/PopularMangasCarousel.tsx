@@ -19,19 +19,10 @@ const queryParams = {
   createdAtSince: dayjs().subtract(4, 'month').format('YYYY-MM-DDTHH:mm:ss'),
 };
 export default async function PopularMangasCarousel() {
-  const cookieStore =await cookies()
-  const cookieHeader = cookieStore.toString()
-  const isLoggedIn = !!cookieStore.get('accessToken')
+  const cookieStore = await cookies();
+  const isLoggedIn = !!cookieStore.get('accessToken');
 
-  const config: RequestInit = {
-    ...(cookieHeader && {
-      headers: {
-        Cookie: cookieHeader,
-      },
-    }),
-  };
-
-  const data = await getMangas(queryParams, config);
+  const data = await getMangas(queryParams);
   const popularMangas = data?.data || [];
 
   return (

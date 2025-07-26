@@ -11,18 +11,9 @@ import NoCoverImage from '@/components/NoData/NoCoverImage';
 
 export default async function Page() {
   const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
-  const isLoggedIn = cookieStore.get('accessToken')
+  const isLoggedIn = cookieStore.get('accessToken');
 
-  const config: RequestInit = {
-    ...(cookieHeader && {
-      headers: {
-        Cookie: cookieHeader,
-      },
-    }),
-  };
-
-  const data = await getRandomManga(config);
+  const data = await getRandomManga();
   const {
     id,
     title,
@@ -40,19 +31,16 @@ export default async function Page() {
 
   return (
     <main className="page-container relative bg-[url('/assets/hero-bg.jpg')] bg-cover bg-center py-10">
-      <div className="container mx-auto max-w-6xl rounded-xl bg-black/70 p-6 backdrop-blur-md shadow-lg text-white">
+      <div className="container mx-auto max-w-6xl rounded-xl bg-black/70 p-6 text-white shadow-lg backdrop-blur-md">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {/* LEFT: COVER */}
-          
-          <div className="w-full overflow-hidden rounded-lg shadow-md aspect-[2/3] bg-gray-800">
+
+          <div className="aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-800 shadow-md">
             {coverArt ? (
-              <img
-                src={coverArt}
-                alt={title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            ) : (<NoCoverImage />)}
+              <img src={coverArt} alt={title} className="h-full w-full object-cover" loading="lazy" />
+            ) : (
+              <NoCoverImage />
+            )}
           </div>
 
           {/* RIGHT: DETAILS */}
@@ -63,7 +51,7 @@ export default async function Page() {
             </Typography>
 
             {/* Metadata */}
-            <div className="text-sm text-gray-300 flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 text-sm text-gray-300">
               {year && <span>📅 {year}</span>}
               {status && <span>📖 {status}</span>}
               {contentRating && <span>🔞 {contentRating}</span>}
@@ -84,9 +72,7 @@ export default async function Page() {
                   additionalClassNames="rounded-md bg-primary hover:bg-primary/80"
                 />
               </Link>
-              {isLoggedIn && (
-                <BookmarkButton type="button" manga={data} />
-              )}
+              {isLoggedIn && <BookmarkButton type="button" manga={data} />}
             </div>
 
             {/* Tags */}

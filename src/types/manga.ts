@@ -1,22 +1,9 @@
-import { IMangaTag } from "./tag";
-
-export enum MangaStatus {
-  ONGOING = 'ongoing',
-  COMPLETED = 'completed',
-  CANCELLED = 'cancelled',
-  HIATUS = 'hiatus',
-}
-
-export enum ContentRating {
-  SAFE = 'safe',
-  SUGGESTIVE = 'suggestive',
-  EROTICA = 'erotica',
-  PORNOGRAPHIC = 'pornographic',
-}
-
+import { ContentRating, MangaStatus } from './enums';
+import { IMangaTag } from './tag';
 
 export interface IManga {
   id: string;
+  type: string;
   title: string;
   description: string;
   lastVolume: string;
@@ -33,20 +20,6 @@ export interface IManga {
   bookmarkedByMe: boolean;
 }
 
-export interface IChapterInfo {
-  chapter: string;
-  id: string;
-  isUnavailable: boolean;
-  others: string[];
-  count: number;
-}
-
-export interface IVolumeInfo {
-  volume: string;
-  count: number;
-  chapters: Record<string, IChapterInfo>;
-}
-
 export interface IMangaWithVolume extends IManga {
   volumes: {
     volume: string;
@@ -58,8 +31,7 @@ export interface IMangaWithVolume extends IManga {
   }[];
 }
 
-
-export interface IGetMangaResponse{
+export interface IGetMangaResponse {
   data: IManga[];
   limit: number;
   offset: number;

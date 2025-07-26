@@ -5,8 +5,9 @@ import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import Typography from '@/components/ui/Typography';
 import { END_POINTS } from '@/constants/endpoints';
-import fetcher from '@/lib/fetcher';
+import universalFetcher from '@/lib/fetcher';
 import useAuthStore from '@/stores/authStore';
+import { IUserWithToken } from '@/types/user';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -25,7 +26,7 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      const data = await fetcher(END_POINTS.auth.login, {
+      const data = await universalFetcher<IUserWithToken>(END_POINTS.auth.login, {
         config: { method: 'POST', body: JSON.stringify({ username, password }) },
       });
       const { accessToken, ...user } = data;

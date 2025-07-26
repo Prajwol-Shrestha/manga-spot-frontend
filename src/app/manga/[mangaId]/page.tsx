@@ -8,26 +8,15 @@ import { cookies } from 'next/headers';
 import NoCoverImage from '@/components/NoData/NoCoverImage';
 
 export default async function MangaDetailsPage({ params }: { params: Promise<{ mangaId: string }> }) {
-  const cookieStore = await cookies()
-  const cookieHeader = cookieStore.toString()
-
-  const isLoggedIn = cookieStore.get('accessToken')
-
-  const config: RequestInit = {
-    ...(cookieHeader && {
-      headers: {
-        Cookie: cookieHeader,
-      },
-    }),
-  };
+  const cookieStore = await cookies();
+  const isLoggedIn = cookieStore.get('accessToken');
 
   const { mangaId } = await params;
-  const mangaData: IMangaWithVolume = await getMangaById(mangaId, undefined, config);
+  const mangaData: IMangaWithVolume = await getMangaById(mangaId);
 
   const groupTags = (group: string) => mangaData.tags.filter((tag) => tag.group === group);
 
   const chapters = mangaData.volumes.flatMap((v) => v.chapters);
-
 
   return (
     <main className="page-container max-w-5xl space-y-10 px-4 py-12">
@@ -45,7 +34,7 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
                 decoding="async"
               />
             ) : (
-                <NoCoverImage />
+              <NoCoverImage />
             )}
           </div>
         </div>
@@ -105,9 +94,7 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
             })}
           </div>
 
-          {isLoggedIn && (
-            <BookmarkButton type="button" manga={mangaData} />
-          )}
+          {isLoggedIn && <BookmarkButton type="button" manga={mangaData} />}
         </div>
       </div>
 
@@ -116,7 +103,7 @@ export default async function MangaDetailsPage({ params }: { params: Promise<{ m
         <Typography variant="h5" className="font-semibold">
           Chapters
         </Typography>
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex flex-wrap gap-3">
           {chapters.map((ch) => (
             <div key={ch.chapterId} className="space-y-2">
               <Link
