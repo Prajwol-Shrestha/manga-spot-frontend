@@ -24,7 +24,7 @@ export default function ProfileDropdown({ handleLogout }: IProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={user?.avatarUrl} />
           <AvatarFallback>{inital}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
