@@ -28,8 +28,5 @@
     //   "binding": "NEXT_INC_CACHE_R2_BUCKET",
     //   "bucket_name": "<BUCKET_NAME>",
     // },
-  ],
-  "vars": {
-"NEXT_PUBLIC_BASE_URL": "https://manga-spot-backend.onrender.com"
-  }
+  ]
 }

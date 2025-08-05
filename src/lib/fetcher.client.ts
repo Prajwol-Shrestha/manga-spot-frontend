@@ -5,6 +5,7 @@ import { logout } from '@/helpers/logout';
 export async function clientFetcher<T = unknown>(url: string, options?: IFetcherConfig): Promise<T> {
   const { queryParams, config } = options || {};
   const endpoint = new URL(`${baseURL}${url}`);
+  console.log(endpoint, 'endpoint', baseURL);
 
   if (queryParams) {
     const params = buildQueryParams(queryParams);
