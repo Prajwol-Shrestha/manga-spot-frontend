@@ -3,6 +3,8 @@ export const END_POINTS = {
     login: '/api/auth/login',
     signup: '/api/auth/signup',
     logout: '/api/auth/logout',
+    'request-reset-password': '/api/auth/request-reset-password',
+    'reset-password': '/api/auth/reset-password',
   },
   user: {
     me: '/api/user/me',

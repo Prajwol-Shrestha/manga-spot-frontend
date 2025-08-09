@@ -5,8 +5,7 @@ import { ThemeProvider } from '@/providers/theme-provider';
 import { Toaster } from 'sonner';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
-
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,12 +32,12 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NuqsAdapter>
-              <div className="flex min-h-screen flex-col justify-between">
-                <Header />
-                <>{children}</>
-                <Footer />
-              </div>
-              <Toaster />
+            <div className="flex min-h-screen flex-col justify-between">
+              <Header />
+              <>{children}</>
+              <Footer />
+            </div>
+            <Toaster richColors />
           </NuqsAdapter>
         </ThemeProvider>
       </body>

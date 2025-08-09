@@ -78,6 +78,11 @@ export default function LoginForm() {
         </Button>
       </div>
       <Typography variant="caption" className="mt-4 text-center">
+        <Link href="/forgot-password" className="underline">
+          Forgot Password?
+        </Link>
+      </Typography>
+      <Typography variant="caption" className="mt-4 text-center">
         Don't have an account?{' '}
         <Link href="/register" className="underline">
           Register
